@@ -50,6 +50,8 @@ try:
         leds_show_bin(adc()) # выводим представление в область LED
         print(volttroyka) # выводим напряжение на выходе тройка-модуля в терминал
 
+
+
     rp.output(troyka, 0) # подаем напряжение 0.0В на вход тройка-модуля
     print('Разрядка конденсатора')
     volttroyka = 3.3 * adc() / 256 # измеряем напряжение на выходе тройка-модуля
@@ -66,7 +68,7 @@ try:
     print('Период одного измерения:', deltat/len(data_mesure), 'с')
     print('Средняя частота дискретизации:', (len(data_mesure)/deltat), 'Гц')
     print('Шаг квантования АЦП: 0.0129 В')
-    print('Средняя частота дискретизации:', (len(data_mesure)/deltat), 'Гц')
+
 
 
     plt.plot(data_mesure) # строим график
@@ -76,7 +78,8 @@ try:
         outfile.write("\n".join([str(item) for item in data_mesure]))
 
     with open("settings.txt", "w") as outfile:
-        outfile.write("\n".join(['Шаг квантования АЦП: 0.0129 В', f'Средняя частота дискретизации: {len(data_mesure/deltat)} Гц']))
+        outfile.write("\n".join(['Шаг квантования АЦП: 0.0129 В', f"Средняя частота дискретизации: {(len(data_mesure)/deltat)}Гц"]))
+    print('Выводим график')
 
 finally:
     rp.output(leds,0)
